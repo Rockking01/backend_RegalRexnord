@@ -1,9 +1,9 @@
 from django.db import models
-from .player import Player
+from .user import User
 
 
 class GameSession(models.Model):
-    playerid = models.ForeignKey(Player, on_delete=models.CASCADE)
+    playerid = models.ForeignKey(User, on_delete=models.CASCADE)
     moduloJuego = models.IntegerField()
     nivel = models.IntegerField(null=True)
     velocidad = models.IntegerField()

@@ -36,6 +36,7 @@ class UserView(viewsets.ModelViewSet):
             "user": str(request.user),
             'auth': str(request.auth),
             'role': bool(request.user.is_manager),
+            "id": request.user.id,
         }, status=status.HTTP_200_OK) 
 
 

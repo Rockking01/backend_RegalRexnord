@@ -11,3 +11,11 @@ class GameSessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = GameSession
         fields = "__all__"
+
+class playerSerializer(serializers.Serializer):
+
+    id = serializers.CharField(
+
+        required=True,
+        
+    )

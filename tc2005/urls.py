@@ -18,7 +18,6 @@ from django.urls import include, path
 from rest_framework import routers
 from tc2005.views.user_view import UserView
 from tc2005.views.scoreboard_view import ScoreboardView
-from tc2005.views.player_view import PlayerView
 from tc2005.views.gameSession_view import GameSessionView
 from tc2005.views.authRegistro_view import AuthRegistroView
 
@@ -27,7 +26,6 @@ router = routers.DefaultRouter()
 
 router.register("users", viewset=UserView)
 router.register("scores", viewset=ScoreboardView)
-router.register("players", viewset=PlayerView)
 router.register("gameSessions", viewset=GameSessionView)
 router.register("token", viewset=AuthRegistroView)
 
