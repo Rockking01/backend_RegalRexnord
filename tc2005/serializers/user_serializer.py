@@ -3,8 +3,8 @@ from tc2005.models import User
 
 class UserSerializer(serializers.ModelSerializer):
 
-    total_score = serializers.CharField()
-    average_score = serializers.CharField()
+    total_score = serializers.CharField()  
+    average_score = serializers.CharField() 
     
     class Meta:
         model = User
@@ -27,4 +27,11 @@ class LoginSerializer(serializers.Serializer):
         required=True,
       
     )
-        
+
+class RegisterSerializer(serializers.Serializer):
+    email = serializers.CharField(required=True)
+    password = serializers.CharField(required=True,
+        style={'input_type': 'password'})
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    birthday = serializers.DateField()

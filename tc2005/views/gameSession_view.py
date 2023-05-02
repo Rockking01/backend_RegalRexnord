@@ -43,13 +43,13 @@ class GameSessionView(viewsets.ModelViewSet):
 
             try:
                 sessions = GameSession.objects.filter(playerid=id)
-                serializer = GameSessionSerializer(sessions, many=True)
+                gameserializer = GameSessionSerializer(sessions, many=True)
             
             except BaseException as e:
                 raise ValidationError({"error": str(e)})
             
 
-            return Response({"sessiones": serializer.data}, status=status.HTTP_200_OK)
+            return Response({"sessiones": gameserializer.data}, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -11,3 +11,11 @@ class AuthRegistroSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuthRegistro
         fields = "__all__"
+
+class tokenSerializer(serializers.Serializer):
+
+    token = serializers.CharField(
+
+        required=True,
+        
+    )

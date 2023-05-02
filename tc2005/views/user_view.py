@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from tc2005.models import User
-from tc2005.serializers.user_serializer import UserSerializer, LoginSerializer
+from tc2005.serializers.user_serializer import UserSerializer, LoginSerializer, RegisterSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.serializers import ValidationError
@@ -69,24 +69,26 @@ class UserView(viewsets.ModelViewSet):
 
         
             
+    @action(methods=["POST"],  detail=False, serializer_class=RegisterSerializer, permission_classes=[AllowAny])
+    def createNewUser(self, request):
 
-    # Signup
-    def create(self, request):
-
-        serializer = UserSerializer(data=request.data)
+        serializer = RegisterSerializer(data=request.data)
         user =  None
 
         if serializer.is_valid():
             user =  User.objects.create_user(
                 email=serializer.validated_data["email"],
                 password=serializer.validated_data["password"],
-            
+                first_name=serializer.validated_data["first_name"],
+                last_name=serializer.validated_data["last_name"],
+                birthday=serializer.validated_data["birthday"],
+               
             )
             
             print(user)
             
             user.save()
-            response = UserSerializer(instance=user, context={'request': request} )
+            response = RegisterSerializer(instance=user, context={'request': request} )
 
             return Response(response.data, status=status.HTTP_200_OK)
         
