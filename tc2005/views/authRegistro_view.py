@@ -57,3 +57,18 @@ class AuthRegistroView(viewsets.ModelViewSet):
                 return Response({"status": "Token has been used"})
             except AuthRegistro.DoesNotExist:
                 return Response({"error": "Invalid or inactive token"}, status=status.HTTP_400_BAD_REQUEST)
+            
+    @action(methods=["POST"],  detail=False, serializer_class=tokenSerializer, permission_classes=[IsAuthenticated])
+    def createToken(self, request):
+        serializer = tokenSerializer(data=request.data)
+
+        if serializer.is_valid():
+            authregistro = AuthRegistro.objects.create(
+                
+                authregistro=serializer.validated_data["authregistro"]
+            )
+            authregistro.save()
+        
+            return Response({"detail": "auth saved"}, status=status.HTTP_200_OK) 
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

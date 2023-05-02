@@ -11,4 +11,4 @@ class AuthRegistro(models.Model):
         (SENDED, 'Sended'),
     ]
     authKey = models.CharField(primary_key=True, max_length=10)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=ACTIVE)
