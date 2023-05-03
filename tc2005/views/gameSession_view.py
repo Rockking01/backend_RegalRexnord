@@ -32,7 +32,7 @@ class GameSessionView(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-    @action(methods=["POST"],  detail=False, serializer_class=playerSerializer, permission_classes=[AllowAny])
+    @action(methods=["POST"],  detail=False, serializer_class=playerSerializer, permission_classes=[IsAuthenticated])
     def specificUser(self,request):
     
         serializer = playerSerializer(data=request.data)
