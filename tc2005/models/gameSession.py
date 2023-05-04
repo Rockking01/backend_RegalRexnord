@@ -4,10 +4,10 @@ from .user import User
 
 class GameSession(models.Model):
     playerid = models.ForeignKey(User, on_delete=models.CASCADE)
-    moduloJuego = models.IntegerField()
+    moduloJuego = models.IntegerField(default=0)
     nivel = models.IntegerField(null=True)
-    velocidad = models.IntegerField()
+    velocidad = models.IntegerField(default=0)
     diferencia = models.IntegerField(null=True)
     errores = models.IntegerField(null=True)
-    score = models.IntegerField()
-    tiempoSesion = models.TimeField()
+    score = models.IntegerField(default=0)
+    tiempoSesion = models.TimeField(default=0, null=True)

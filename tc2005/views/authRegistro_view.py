@@ -30,7 +30,7 @@ class AuthRegistroView(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-    @action(methods=["POST"],  detail=False, serializer_class=tokenSerializer, permission_classes=[IsAuthenticated])
+    @action(methods=["POST"],  detail=False, serializer_class=tokenSerializer, permission_classes=[])
     def authenticateToken(self, request):
         serializer = tokenSerializer(data=request.data)
         if serializer.is_valid():
@@ -44,7 +44,7 @@ class AuthRegistroView(viewsets.ModelViewSet):
                 return Response({"error": "Invalid or inactive token"}, status=status.HTTP_400_BAD_REQUEST)
 
         
-    @action(methods=["PUT"],  detail=False, serializer_class=AuthRegistroSerializer, permission_classes=[IsAuthenticated])
+    @action(methods=["PUT"],  detail=False, serializer_class=AuthRegistroSerializer, permission_classes=[])
     def updateToken(self, request):
         serializer = tokenSerializer(data=request.data)
         if serializer.is_valid():

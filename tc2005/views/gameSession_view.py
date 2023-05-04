@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from tc2005.models import GameSession
-from tc2005.serializers.gameSession_serializer import GameSessionSerializer, playerSerializer
+from tc2005.serializers.gameSession_serializer import GameSessionSerializer, playerSerializer, GameSerializer
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
@@ -60,6 +60,21 @@ class GameSessionView(viewsets.ModelViewSet):
         serializer = self.get_serializer(game_sessions, many=True)
         return Response(serializer.data)
     
+    @action(methods=["POST"],  detail=False, serializer_class=GameSerializer, permission_classes=[AllowAny])
+
+    def sendGameData(request,self):
+
+        serializer = GameSerializer(data=request.data)
+
+        if serializer.is_valid():
+            session = GameSession.objects.create(
+                session=serializer.validated_data["session"]
+            )
+            session.save()
+        
+            return Response({"detail": "session saved"}, status=status.HTTP_200_OK) 
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
 
