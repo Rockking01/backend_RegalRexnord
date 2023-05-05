@@ -44,7 +44,7 @@ class User(AbstractBaseUser):
     @property
     def total_score(self):
         from .gameSession import GameSession
-        scores = GameSession.objects.all().filter(user=self)
+        scores = GameSession.objects.all().filter(playerid=self)
         total = 0
         for score in scores:
             total = total + score.score
@@ -54,7 +54,7 @@ class User(AbstractBaseUser):
     @property
     def average_score(self):
         from .gameSession import GameSession
-        scores = GameSession.objects.all().filter(user=self)
+        scores = GameSession.objects.all().filter(playerid=self)
         if (len(scores) == 0):
             return 0
         return self.total_score / len(scores)
