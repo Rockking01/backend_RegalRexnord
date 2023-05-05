@@ -27,11 +27,10 @@ class GameSerializer(serializers.Serializer):
         required=True,
         
     )
-    modulo = serializers.CharField(
+    score = serializers.CharField(
 
         required=True,
     
-        
     )
 
     nivel = serializers.CharField(
