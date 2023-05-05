@@ -10,4 +10,3 @@ class GameSession(models.Model):
     diferencia = models.IntegerField(null=True)
     errores = models.IntegerField(null=True)
     score = models.IntegerField(default=0)
-    tiempoSesion = models.TimeField(default=0, null=True)

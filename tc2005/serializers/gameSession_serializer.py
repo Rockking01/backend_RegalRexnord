@@ -44,5 +44,3 @@ class GameSerializer(serializers.Serializer):
     errores = serializers.CharField(
         required=True
     )
-
-    tiempoSesion = serializers.CharField(required=True)
